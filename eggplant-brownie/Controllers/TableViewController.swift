@@ -15,6 +15,7 @@ protocol TableViewControllerDelegate {
 class TableViewController : UITableViewController, TableViewControllerDelegate {
     var refeicoes = [Refeicao("Pizza", 5), Refeicao("Coxinha", 5)]
  
+    //MARK: - Table View methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
     }
@@ -23,7 +24,27 @@ class TableViewController : UITableViewController, TableViewControllerDelegate {
         let celula = UITableViewCell(style: .default, reuseIdentifier: nil)
         let refeicao = refeicoes[indexPath.row]
         celula.textLabel?.text = refeicao.nome
+        //Cria evento de longpress
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressCell(_:)))
+        //Adiciono evento de longpress a celular via addGestureRecognizer
+        celula.addGestureRecognizer(longPress)
         return celula
+    }
+    
+    //MARK: - Longpress Action
+    
+    @objc func longPressCell(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            let view = gesture.view as! UITableViewCell
+            guard let index = tableView.indexPath(for: view) else { return }
+            let refeicao = refeicoes[index.row]
+            
+            let alerta = UIAlertController(title: refeicao.nome, message: "Felicidade: \(refeicao.felicidade)", preferredStyle: .alert)
+            let botaoCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+            alerta.addAction(botaoCancelar)
+            present(alerta, animated: true, completion: nil)
+            
+        }
     }
     
     func add(_ refeicao: Refeicao) {
