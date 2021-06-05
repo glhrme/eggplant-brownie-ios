@@ -2,7 +2,7 @@
 //  Item.swift
 //  eggplant-brownie
 //
-//  Created by Andriu Felipe Coelho on 16/03/19.
+//  Created by Alura on 16/03/19.
 //  Copyright © 2019 Alura. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ class Item: NSObject {
     
     // MARK: - Init
     
-    init(_ nome: String, _ calorias: Double) {
+    init(nome: String, calorias: Double) {
         self.nome = nome
         self.calorias = calorias
     }

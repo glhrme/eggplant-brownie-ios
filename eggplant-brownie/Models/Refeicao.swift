@@ -2,7 +2,7 @@
 //  Refeicao.swift
 //  eggplant-brownie
 //
-//  Created by Andriu Felipe Coelho on 16/03/19.
+//  Created by Alura on 16/03/19.
 //  Copyright © 2019 Alura. All rights reserved.
 //
 
@@ -18,17 +18,11 @@ class Refeicao: NSObject {
     
     // MARK: - Init
     
-    init(_ nome: String, _ felicidade: Int, _ itens: [Item]) {
+    init(nome: String, felicidade: Int, itens: [Item] = []) {
         self.nome = nome
         self.felicidade = felicidade
         self.itens = itens
     }
-
-    init(_ nome: String, _ felicidade: Int) {
-        self.nome = nome
-        self.felicidade = felicidade
-    }
-
     
     // MARK: - Metodos
     
@@ -40,5 +34,15 @@ class Refeicao: NSObject {
         }
         
         return total
+    }
+    
+    func detalhes() -> String {
+        var mensagem = "Felicidade: \(felicidade)"
+        
+        for item in itens {
+            mensagem += ", \(item.nome) - calorias: \(item.calorias)"
+        }
+        
+        return mensagem
     }
 }
